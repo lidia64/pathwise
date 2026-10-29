@@ -1,4 +1,5 @@
 import type { SVGProps } from "react";
+import Link from "next/link";
 
 type FeatureIcon = "geography" | "pathways" | "impact" | "methodology";
 
@@ -7,6 +8,7 @@ type FeatureCardProps = {
   icon: FeatureIcon;
   title: string;
   description: string;
+  href: string;
 };
 
 function FeatureIconGraphic({
@@ -64,9 +66,10 @@ export function FeatureCard({
   icon,
   title,
   description,
+  href,
 }: FeatureCardProps) {
   return (
-    <article className="feature-card">
+    <Link className="feature-card" href={href}>
       <div className="feature-card-top">
         <span className="feature-number">{number}</span>
         <span className="feature-icon-wrap">
@@ -76,6 +79,7 @@ export function FeatureCard({
       <h3>{title}</h3>
       <p>{description}</p>
       <span className="feature-card-rule" aria-hidden="true" />
-    </article>
+      <span className="feature-card-action">Explore module</span>
+    </Link>
   );
 }

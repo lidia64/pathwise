@@ -1,10 +1,17 @@
+import Link from "next/link";
 import { FeatureCard } from "@/components/feature-card";
 import { BrandMark } from "@/components/brand-mark";
+import { DecisionFlow } from "@/components/decision-flow";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { getMessages } from "@/lib/i18n/server";
 
 const features = [
   {
     number: "01",
     icon: "geography" as const,
+    href: "/geography",
+    titleKey: "landing.featureGeography",
+    descriptionKey: "landing.featureGeographyCopy",
     title: "Explore geography",
     description:
       "See how verified evidence varies across Rwanda, with clear context for every place and indicator.",
@@ -12,6 +19,9 @@ const features = [
   {
     number: "02",
     icon: "pathways" as const,
+    href: "/pathways",
+    titleKey: "landing.featurePathways",
+    descriptionKey: "landing.featurePathwaysCopy",
     title: "Find pathways",
     description:
       "Explore transparent, evidence-led signals that can help frame questions about resilience.",
@@ -19,6 +29,9 @@ const features = [
   {
     number: "03",
     icon: "impact" as const,
+    href: "/impact",
+    titleKey: "landing.featureImpact",
+    descriptionKey: "landing.featureImpactCopy",
     title: "Monitor impact",
     description:
       "Keep an eye on indicators over time and understand what the evidence can—and cannot—tell you.",
@@ -26,32 +39,38 @@ const features = [
   {
     number: "04",
     icon: "methodology" as const,
+    href: "/methodology",
+    titleKey: "landing.featureMethodology",
+    descriptionKey: "landing.featureMethodologyCopy",
     title: "View methodology",
     description:
       "Understand sources, definitions and limitations before drawing conclusions from the data.",
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { language, translate } = await getMessages();
+  const t = translate;
   return (
     <>
       <header className="site-header">
         <div className="header-inner">
-          <a className="brand" href="#home" aria-label="Pathwise home">
+          <a className="brand" href="#home" aria-label={t(language, "common.home", "Pathwise home")}>
             <BrandMark />
             <span className="brand-name">pathwise</span>
           </a>
 
           <nav className="main-nav" aria-label="Main navigation">
-            <a href="#about">About</a>
-            <a href="#explore">Explore</a>
-            <a href="#methodology">Methodology</a>
+            <a href="#about">{t(language, "landing.about", "About")}</a>
+            <Link href="/dashboard">{t(language, "landing.explore", "Explore")}</Link>
+            <Link href="/methodology">{t(language, "nav.methodology", "Methodology")}</Link>
           </nav>
 
-          <a className="button button-small" href="#explore">
-            Explore Rwanda
+          <LanguageSwitcher language={language} />
+          <Link className="button button-small" href="/dashboard">
+            {t(language, "landing.exploreRwanda", "Explore Rwanda")}
             <span aria-hidden="true">→</span>
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -61,33 +80,29 @@ export default function Home() {
             <div className="hero-copy">
               <p className="eyebrow">
                 <span className="eyebrow-mark" aria-hidden="true" />
-                Evidence for a more resilient Rwanda
+                {t(language, "landing.heroEyebrow", "Evidence for a more resilient Rwanda")}
               </p>
               <h1 id="hero-title">
-                From vulnerability
-                <br />
-                to <span>resilience.</span>
+                {t(language, "landing.heroTitle", "From vulnerability to resilience.")}
               </h1>
               <p className="hero-description">
-                A clearer way to explore financial inclusion, vulnerability and
-                social protection evidence—and turn what we learn into better
-                questions for decision-making.
+                {t(language, "landing.heroDescription", "A clearer way to explore financial inclusion, vulnerability and social protection evidence—and turn what we learn into better questions for decision-making.")}
               </p>
               <div className="hero-actions">
-                <a className="button" href="#explore">
-                  Explore Rwanda
+                <Link className="button" href="/dashboard">
+                  {t(language, "landing.exploreRwanda", "Explore Rwanda")}
                   <span className="button-arrow" aria-hidden="true">
                     →
                   </span>
-                </a>
-                <a className="text-link" href="#methodology">
-                  How we work
+                </Link>
+                <Link className="text-link" href="/methodology">
+                  {t(language, "landing.howWeWork", "How we work")}
                   <span aria-hidden="true">↗</span>
-                </a>
+                </Link>
               </div>
               <div className="hero-footnote">
                 <span className="footnote-line" aria-hidden="true" />
-                Built for people shaping policy, programmes and research.
+                {t(language, "landing.heroFootnote", "Built for people shaping policy, programmes and research.")}
               </div>
             </div>
 
@@ -98,8 +113,8 @@ export default function Home() {
             >
               <div className="concept-panel-top">
                 <div>
-                  <span className="concept-kicker">A connected view</span>
-                  <h2>Make evidence<br />easier to navigate.</h2>
+                  <span className="concept-kicker">{t(language, "landing.conceptKicker", "A connected view")}</span>
+                  <h2>{t(language, "landing.conceptTitle", "Make evidence easier to navigate.")}</h2>
                 </div>
                 <div className="concept-emblem" aria-hidden="true">
                   <BrandMark />
@@ -111,27 +126,27 @@ export default function Home() {
                   <span className="pathway-node">
                     <span />
                   </span>
-                  <span className="pathway-label">Financial inclusion</span>
-                  <span className="pathway-caption">Explore access</span>
+                  <span className="pathway-label">{t(language, "landing.financialInclusion", "Financial inclusion")}</span>
+                  <span className="pathway-caption">{t(language, "landing.exploreAccess", "Explore access")}</span>
                 </div>
                 <div className="pathway-step step-two">
                   <span className="pathway-node">
                     <span />
                   </span>
-                  <span className="pathway-label">Vulnerability</span>
-                  <span className="pathway-caption">Understand context</span>
+                  <span className="pathway-label">{t(language, "landing.vulnerability", "Vulnerability")}</span>
+                  <span className="pathway-caption">{t(language, "landing.understandContext", "Understand context")}</span>
                 </div>
                 <div className="pathway-step step-three">
                   <span className="pathway-node">
                     <span />
                   </span>
-                  <span className="pathway-label">Potential pathways</span>
-                  <span className="pathway-caption">Consider what’s next</span>
+                  <span className="pathway-label">{t(language, "landing.potentialPathways", "Potential pathways")}</span>
+                  <span className="pathway-caption">{t(language, "landing.considerNext", "Consider what’s next")}</span>
                 </div>
               </div>
               <div className="concept-panel-bottom">
                 <span className="concept-dot" aria-hidden="true" />
-                Conceptual framework — not a statistical output
+                {t(language, "landing.conceptDisclaimer", "Conceptual framework — not a statistical output")}
               </div>
               <div className="concept-decoration decoration-one" aria-hidden="true" />
               <div className="concept-decoration decoration-two" aria-hidden="true" />
@@ -142,20 +157,33 @@ export default function Home() {
 
         <section className="problem-section" aria-labelledby="problem-title">
           <div className="section-inner problem-inner">
-            <p className="section-label">The challenge</p>
+            <p className="section-label">{t(language, "landing.challenge", "The challenge")}</p>
             <div className="problem-copy">
               <h2 id="problem-title">
-                Good decisions start with evidence you can trust.
+                {t(language, "landing.challengeTitle", "Good decisions start with evidence you can trust.")}
               </h2>
               <p>
-                Evidence on financial access, vulnerability and social
-                protection can come from different surveys, populations and
-                periods. Pathwise is designed to help decision-makers explore
-                each source on its own terms, understand its limitations and
-                investigate potential pathways—without overstating what the
-                data says.
+                {t(language, "landing.challengeCopy", "Evidence on financial access, vulnerability and social protection can come from different surveys, populations and periods. Pathwise is designed to help decision-makers explore each source on its own terms, understand its limitations and investigate potential pathways—without overstating what the data says.")}
               </p>
             </div>
+          </div>
+        </section>
+
+        <section
+          className="framework-section"
+          aria-labelledby="framework-title"
+        >
+          <div className="section-inner">
+            <div className="framework-heading">
+              <div>
+                <p className="section-label">{t(language, "landing.frameworkEyebrow", "How Pathwise works")}</p>
+                <h2 id="framework-title">{t(language, "landing.frameworkTitle", "From evidence to a decision trail.")}</h2>
+              </div>
+              <p>
+                {t(language, "landing.frameworkDescription", "A transparent framework for investigation—not a causal model or an automated recommendation engine.")}
+              </p>
+            </div>
+            <DecisionFlow language={language} />
           </div>
         </section>
 
@@ -167,16 +195,21 @@ export default function Home() {
           <div className="section-inner">
             <div className="features-heading">
               <div>
-                <p className="section-label">A practical starting point</p>
-                <h2 id="features-title">Evidence into perspective.</h2>
+                <p className="section-label">{t(language, "landing.featuresEyebrow", "A practical starting point")}</p>
+                <h2 id="features-title">{t(language, "landing.featuresTitle", "Evidence into perspective.")}</h2>
               </div>
               <p className="features-intro">
-                Explore the questions Pathwise is built to help answer.
+                {t(language, "landing.featuresIntro", "Explore the questions Pathwise is built to help answer.")}
               </p>
             </div>
             <div className="feature-grid">
               {features.map((feature) => (
-                <FeatureCard key={feature.number} {...feature} />
+                <FeatureCard
+                  key={feature.number}
+                  {...feature}
+                  title={t(language, feature.titleKey, feature.title)}
+                  description={t(language, feature.descriptionKey, feature.description)}
+                />
               ))}
             </div>
           </div>
@@ -192,24 +225,18 @@ export default function Home() {
               <BrandMark />
             </div>
             <div className="methodology-copy">
-              <p className="section-label">Data &amp; methodology</p>
+              <p className="section-label">{t(language, "landing.methodEyebrow", "Data & methodology")}</p>
               <h2 id="methodology-title">
-                Transparent by design.
-                <br />
-                Careful with every claim.
+                {t(language, "landing.methodTitle", "Transparent by design. Careful with every claim.")}
               </h2>
             </div>
             <div className="methodology-note">
               <p>
-                Pathwise is being developed around NISR FinScope 2024, EICV7
-                2023/24 and relevant EICV7 VUP material. Indicators will only
-                be shown when their source, definition, population and reference
-                period have been verified. No survey respondents are combined
-                across sources.
+                {t(language, "landing.methodCopy", "Pathwise is being developed around NISR FinScope 2024, EICV7 2023/24 and relevant EICV7 VUP material. Indicators will only be shown when their source, definition, population and reference period have been verified. No survey respondents are combined across sources.")}
               </p>
               <p className="note-status">
                 <span aria-hidden="true" />
-                Statistics pending source verification
+                {t(language, "landing.statisticsPending", "Statistics pending source verification")}
               </p>
             </div>
           </div>
@@ -218,17 +245,16 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="footer-inner">
-          <a className="brand footer-brand" href="#home" aria-label="Pathwise home">
+          <a className="brand footer-brand" href="#home" aria-label={t(language, "common.home", "Pathwise home")}>
             <BrandMark />
             <span className="brand-name">pathwise</span>
           </a>
-          <p className="footer-tagline">From Vulnerability to Resilience.</p>
+          <p className="footer-tagline">{t(language, "common.tagline", "From Vulnerability to Resilience.")}</p>
           <p className="footer-note">
-            Decision support grounded in evidence, designed for Rwanda.
+            {t(language, "landing.footerNote", "Decision support grounded in evidence, designed for Rwanda.")}
           </p>
           <span className="footer-copyright">
-            2026 Pathwise <span aria-hidden="true">·</span> NISR Big Data
-            Hackathon
+            {t(language, "landing.copyright", "2026 Pathwise · NISR Big Data Hackathon")}
           </span>
         </div>
       </footer>

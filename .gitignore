@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# source documents and raw datasets (keep local; do not commit)
+/data/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
