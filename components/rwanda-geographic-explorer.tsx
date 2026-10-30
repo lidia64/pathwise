@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import {
+  ResilienceIntelligenceWorkflow,
+  type ResilienceWorkflowLabels,
+} from "@/components/resilience-intelligence-workflow";
 
 type Position = [number, number, ...number[]];
 type PolygonCoordinates = Position[][];
@@ -245,8 +249,12 @@ function displayAreaName(name: string) {
 
 export function RwandaGeographicExplorer({
   labels,
+  intelligenceLabels,
+  initialProvince,
 }: {
   labels: GeographicExplorerLabels;
+  intelligenceLabels: ResilienceWorkflowLabels;
+  initialProvince?: string;
 }) {
   const [features, setFeatures] = useState<RwandaBoundaryFeature[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -277,6 +285,14 @@ export function RwandaGeographicExplorer({
           throw new Error("The boundary file did not contain valid Rwanda area features.");
         }
         setFeatures(data.features);
+        const initialFeature = data.features.find(
+          (feature) =>
+            displayAreaName(feature.properties.shapeName) === initialProvince,
+        );
+        if (initialFeature) {
+          setSelectedId(initialFeature.properties.shapeID);
+          setAreaFilter(initialFeature.properties.shapeID);
+        }
       } catch (error) {
         if (!controller.signal.aborted) {
           setLoadError(
@@ -292,7 +308,7 @@ export function RwandaGeographicExplorer({
 
     void loadBoundaries();
     return () => controller.abort();
-  }, [retryCount]);
+  }, [initialProvince, retryCount]);
 
   const paths = useMemo(() => createMapPaths(features), [features]);
   const selectedFeature = features.find(
@@ -573,7 +589,7 @@ export function RwandaGeographicExplorer({
               </dl>
               <Link
                 className="rwanda-navigator-link"
-                href={`/pathways?location=${encodeURIComponent(displayAreaName(selectedFeature.properties.shapeName))}`}
+                href={`/pathways?province=${encodeURIComponent(displayAreaName(selectedFeature.properties.shapeName))}`}
               >
                 {labels.navigatorLink}
               </Link>
@@ -586,6 +602,19 @@ export function RwandaGeographicExplorer({
           </p>
         </aside>
       </div>
+
+      {selectedFeature ? (
+        <ResilienceIntelligenceWorkflow
+          key={selectedFeature.properties.shapeID}
+          province={displayAreaName(selectedFeature.properties.shapeName)}
+          labels={intelligenceLabels}
+        />
+      ) : (
+        <p className="intelligence-empty-state" role="status">
+          Select a province to open its evidence profile, diagnostic questions,
+          potential pathways, and action-plan form.
+        </p>
+      )}
 
       <div className="rwanda-boundary-attribution">
         <span>

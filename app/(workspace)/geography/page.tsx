@@ -14,8 +14,34 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: `${geography.title} | Pathwise` };
 }
 
-export default async function GeographyPage() {
+const supportedProvinces = new Set([
+  "Kigali City",
+  "Southern Province",
+  "Northern Province",
+  "Eastern Province",
+  "Western Province",
+]);
+
+export default async function GeographyPage({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    province?: string | string[];
+    location?: string | string[];
+  }>;
+}) {
   const { geography, common } = await getMessages();
+  const params = await searchParams;
+  const provinceValue = params.province ?? params.location;
+  const requestedProvince = Array.isArray(provinceValue)
+    ? provinceValue[0]
+    : provinceValue;
+  const initialProvince =
+    requestedProvince === "City of Kigali"
+      ? "Kigali City"
+      : requestedProvince && supportedProvinces.has(requestedProvince)
+        ? requestedProvince
+        : undefined;
   const requirements = [
     geography.requirement1,
     geography.requirement2,
@@ -36,7 +62,11 @@ export default async function GeographyPage() {
         description={geography.mapDescription}
         className="geographic-map-panel"
       >
-        <RwandaGeographicExplorer labels={geography.mapLabels} />
+        <RwandaGeographicExplorer
+          labels={geography.mapLabels}
+          intelligenceLabels={geography.intelligence}
+          initialProvince={initialProvince}
+        />
       </SectionPanel>
 
       <div className="geography-evidence-grid">

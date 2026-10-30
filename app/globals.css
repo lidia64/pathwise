@@ -92,6 +92,7 @@ select:focus-visible {
 }
 
 .language-form {
+  position: relative;
   display: inline-flex;
   align-items: center;
   flex: 0 0 auto;
@@ -107,20 +108,106 @@ select:focus-visible {
   clip-path: inset(50%);
 }
 
-.language-form select {
-  min-width: 132px;
+.language-trigger {
+  display: inline-flex;
+  min-width: 140px;
   min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   border: 1px solid var(--border);
-  border-radius: 0;
+  border-radius: 8px;
   background: #fff;
-  padding-inline: 12px;
+  padding: 0 12px;
   color: var(--text);
   font: inherit;
   font-size: 0.875rem;
   cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease;
 }
 
-.language-form select:focus-visible {
+.language-trigger:hover,
+.language-trigger[aria-expanded="true"] {
+  border-color: var(--primary);
+  background: var(--surface-soft);
+}
+
+.language-trigger[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.language-trigger svg,
+.language-menu-option svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.language-trigger svg {
+  color: var(--text-secondary);
+  transition: transform 150ms ease;
+}
+
+.language-menu {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  display: grid;
+  width: max-content;
+  min-width: 100%;
+  max-height: min(60vh, 360px);
+  gap: 3px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  padding: 6px;
+  box-shadow: 0 12px 30px rgb(23 32 51 / 16%);
+}
+
+.language-menu[hidden] {
+  display: none;
+}
+
+.language-menu-option {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  padding: 0 10px;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: start;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.language-menu-option:hover,
+.language-menu-option:focus-visible {
+  background: var(--surface-soft);
+  color: var(--forest);
+}
+
+.language-menu-option[aria-checked="true"] {
+  color: var(--forest);
+  font-weight: 600;
+}
+
+.language-menu-option svg {
+  color: var(--primary);
+}
+
+.language-trigger:focus-visible,
+.language-menu-option:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
@@ -1427,7 +1514,7 @@ select:focus-visible {
     grid-row: 1;
   }
 
-  .language-form select {
+  .language-trigger {
     min-width: 118px;
   }
 

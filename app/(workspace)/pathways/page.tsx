@@ -36,16 +36,20 @@ const supportedGeographicContext = new Set([
 export default async function PathwaysPage({
   searchParams,
 }: {
-  searchParams: Promise<{ location?: string | string[] }>;
+  searchParams: Promise<{
+    location?: string | string[];
+    province?: string | string[];
+  }>;
 }) {
   const { language, translate } = await getMessages();
   const params = await searchParams;
-  const locationValue = Array.isArray(params.location)
-    ? params.location[0]
-    : params.location;
+  const locationValue = params.province ?? params.location;
+  const requestedLocation = Array.isArray(locationValue)
+    ? locationValue[0]
+    : locationValue;
   const selectedLocation =
-    locationValue && supportedGeographicContext.has(locationValue)
-      ? locationValue
+    requestedLocation && supportedGeographicContext.has(requestedLocation)
+      ? requestedLocation
       : null;
   const t = (key: string, english: string) =>
     translate(language, `pathways.${key}`, english);

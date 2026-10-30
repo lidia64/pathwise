@@ -1,77 +1,140 @@
 # Pathwise
 
-**From Vulnerability to Resilience.**
+### From Vulnerability to Resilience
 
-Pathwise is an evidence-led decision-support prototype for exploring financial inclusion, vulnerability, household welfare, social protection, and potential resilience pathways in Rwanda.
+**Pathwise** is a data-driven platform designed to help users explore financial vulnerability, poverty, and resilience in Rwanda. It brings together evidence from existing national datasets to make complex information easier to understand and support informed decision-making.
 
-Its decision journey is:
+## 1. The Problem
 
-**Data → Vulnerability → Bottleneck → Pathway → Action → Outcome**
+Financial inclusion does not always mean financial security. People may have access to financial services while continuing to experience poverty, economic vulnerability, and difficulties managing financial shocks.
 
-Pathwise distinguishes source-reported evidence, calculations derived from documented data, analytical interpretation, and proposed actions. The current application does not calculate survey estimates, activate pathway rules, or claim causal effects.
+However, relevant information is often distributed across different reports and datasets, making it difficult for decision-makers and development stakeholders to understand these challenges together.
 
-## Run locally
+## 2. Our Solution
+
+Pathwise transforms available statistical evidence into an accessible platform for exploring vulnerability and identifying potential pathways towards greater resilience.
+
+It connects data exploration with practical insights, helping users understand challenges, examine possible interventions, and consider evidence-informed actions.
+
+## 3. Project Objectives
+
+- Improve access to information about financial vulnerability and poverty in Rwanda.
+- Make statistical evidence easier to explore and understand.
+- Highlight the difference between financial inclusion and financial resilience.
+- Support geographic exploration of available indicators.
+- Help stakeholders examine potential resilience pathways.
+- Encourage transparent, evidence-based decision-making.
+
+## 4. Key Features
+
+The following features should be described as implemented only when they are available and tested.
+
+- **Explore:** Discover important indicators and statistical evidence.
+- **Geographic Intelligence:** Explore available geographic information through an interactive map.
+- **Hidden Vulnerability Lens:** Understand why financial inclusion does not necessarily mean financial resilience.
+- **Resilience Navigator:** Explore potential pathways and interventions based on identified challenges.
+- **What-If Scenarios:** Examine hypothetical interventions using clearly stated assumptions.
+- **Methodology and Sources:** Understand where the evidence comes from and how it should be interpreted.
+
+## 5. Data Sources
+
+Pathwise uses publicly available statistical evidence relevant to Rwanda, including:
+
+- National Institute of Statistics of Rwanda (NISR) — EICV7 and other relevant publications.
+- FinScope Rwanda 2024.
+- Access to Finance Rwanda (AFR) — Financial Health research.
+
+Each dataset must retain its original source, publication year, definitions, and limitations. Different surveys should not be treated as observations of the same individuals.
+
+## 6. Target Users
+
+- Policymakers and government institutions.
+- NGOs and development organizations.
+- Financial inclusion stakeholders.
+- Social protection and community development practitioners.
+- Researchers and students.
+
+## 7. Technology Stack
+
+The project uses the following technologies, subject to verification against the actual implementation:
+
+- Frontend: Next.js and React.
+- Programming Language: TypeScript.
+- Styling: CSS.
+- Deployment: Vercel.
+- Data visualization and geographic mapping: [Confirm implemented libraries].
+
+## 8. Getting Started
+
+### Prerequisites
+
+- Node.js and npm.
+- Git.
+- A code editor such as Visual Studio Code.
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/lidia64/pathwise.git
+cd pathwise
+```
+
+Install dependencies:
 
 ```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open your browser at:
 
-Available checks:
+```text
+http://localhost:3000
+```
+
+### Production Build
 
 ```bash
-npm run lint
-npx tsc --noEmit
 npm run build
 ```
 
-## Application routes
+## 9. Live Application
 
-- `/` — product introduction and decision framework
-- `/dashboard` — evidence readiness overview; indicators remain unavailable until verified data is connected
-- `/geography` — interactive Rwanda province/Kigali reference map with evidence filters and explicit statistical-data limitations
-- `/vulnerability` — candidate evidence domains and questions to investigate
-- `/pathways` — potential pathway categories; rules and interventions are not active
-- `/impact` — monitoring framework; no achieved or projected impacts are presented
-- `/methodology` — intended sources, comparability and limitations
+**Deployed Application:** https://pathwise-self-xi.vercel.app/
 
-## Data integrity and geographic evidence
+**GitHub Repository:** https://github.com/lidia64/pathwise
 
-The local `data/` directory is ignored by Git. It currently contains four PDF publications/questionnaire files: FinScope 2024 questionnaire, FinScope 2024 final report, FinScope 2024 presentation, and an EICV7 VUP thematic summary. The repository listing contains no respondent microdata, codebook, or geographic aggregate dataset. The summary references a full VUP report and tables workbook not present in the inspected listing. A separately sourced geoBoundaries Open ADM1 reference file contains five 2020-vintage Kigali City/province boundaries under CC BY 4.0; it is for geographic navigation only, not for mapping survey estimates.
+## 10. Data Ethics and Limitations
 
-**No province- or district-level survey estimates are currently supported by the evidence available to Pathwise.** Blank geographic fields in a questionnaire and district sample allocation in a report do not constitute verified geographic estimates. The `/geography` page offers clickable reference boundaries, but shows no geographic statistics, comparisons, or predictions. The `/pathways` route accepts a selected area as context only; it does not make location-specific recommendations.
+Pathwise is designed to communicate evidence responsibly.
 
-See [the source verification audit](./docs/source-verification.md), [the geographic feasibility assessment](./docs/geographic-feasibility.md), and [release readiness](./docs/release-readiness.md) for evidence and limitations.
+- Statistics are presented with their original sources and reporting periods.
+- Different surveys may use different samples, methodologies, and definitions.
+- Missing data is not interpreted as zero.
+- Hypothetical scenarios are not presented as proven outcomes.
+- The platform does not claim causal relationships without supporting evidence.
+- Geographic indicators are displayed only where reliable data is available.
 
-## Languages and localization
+## 11. Expected Impact
 
-The language selector supports these identifiers and native names:
+Pathwise aims to make Rwanda's statistical evidence more accessible and useful for understanding financial vulnerability and exploring opportunities for stronger economic resilience.
 
-| Identifier | Language | HTML language | Direction |
-|---|---|---|---|
-| `kin` | Kinyarwanda | `kin-RW` | LTR |
-| `en` | English (default) | `en` | LTR |
-| `fr` | Français | `fr` | LTR |
-| `sw` | Kiswahili | `sw` | LTR |
-| `zh` | 中文 (Simplified Chinese) | `zh-CN` | LTR |
-| `de` | Deutsch | `de` | LTR |
-| `ar` | العربية | `ar` | RTL |
+By connecting evidence, exploration, and potential action, the platform seeks to support more informed and transparent development decisions.
 
-`kin` is the language identifier for Kinyarwanda; Rwanda's country code is separately represented as `RW`. The selected language is stored in the `pathwise-language` cookie. Existing route paths are retained, and the selector posts to `/api/language` before redirecting back to the current page.
+## 12. Project Information
 
-Language configuration is in `lib/i18n/languages.ts`; translation entries are in `lib/i18n/translations.ts`. Add matching message keys for every supported language and review all user-facing strings, including accessible names and metadata. English fallback currently exists for untranslated entries.
+**Project Name:** Pathwise  
+**Competition:** NISR 2026 Big Data Hackathon  
+**Developer:** Lidia Uwineza  
+**Repository:** https://github.com/lidia64/pathwise
 
-**Translation coverage is incomplete.** Some landing-page and workspace details remain English when another language is selected. Existing translations are draft translations, not certified or independently reviewed by fluent speakers. Do not claim complete seven-language support until route-by-route string coverage, terminology, persistence, and Arabic RTL behavior have been reviewed and tested. See [localization status and review notes](./docs/localization.md).
+---
 
-## Design and engineering
-
-- Next.js App Router, React, TypeScript, and Tailwind CSS.
-- Blue-first Pathwise identity with responsive layouts and shared workspace navigation.
-- No database, authentication system, or survey data service is currently connected.
-- Raw source files under `data/` must not be committed or exposed through the public frontend.
-
-## Deployment readiness
-
-Lint, TypeScript, and production build checks are available as listed above. Browser interaction, accessibility, responsive behavior across all translated strings, language persistence, and Arabic RTL still require deployment-oriented manual or automated validation. No test runner is currently configured in the project.
+_Pathwise — Turning evidence into pathways towards resilience._
