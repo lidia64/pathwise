@@ -31,7 +31,7 @@ npm run build
 
 - `/` — product introduction and decision framework
 - `/dashboard` — evidence readiness overview; indicators remain unavailable until verified data is connected
-- `/geography` — geographic evidence feasibility and future map requirements
+- `/geography` — interactive Rwanda province/Kigali reference map with evidence filters and explicit statistical-data limitations
 - `/vulnerability` — candidate evidence domains and questions to investigate
 - `/pathways` — potential pathway categories; rules and interventions are not active
 - `/impact` — monitoring framework; no achieved or projected impacts are presented
@@ -39,9 +39,9 @@ npm run build
 
 ## Data integrity and geographic evidence
 
-The local `data/` directory is ignored by Git. It currently contains four PDF publications/questionnaire files: FinScope 2024 questionnaire, FinScope 2024 final report, FinScope 2024 presentation, and an EICV7 VUP thematic summary. The repository listing contains no respondent microdata, codebook, geographic aggregate dataset, or boundary geometry. The summary references a full VUP report and tables workbook not present in the inspected listing.
+The local `data/` directory is ignored by Git. It currently contains four PDF publications/questionnaire files: FinScope 2024 questionnaire, FinScope 2024 final report, FinScope 2024 presentation, and an EICV7 VUP thematic summary. The repository listing contains no respondent microdata, codebook, or geographic aggregate dataset. The summary references a full VUP report and tables workbook not present in the inspected listing. A separately sourced geoBoundaries Open ADM1 reference file contains five 2020-vintage Kigali City/province boundaries under CC BY 4.0; it is for geographic navigation only, not for mapping survey estimates.
 
-**A province- or district-level map is not supported by the evidence currently available to Pathwise.** Blank geographic fields in a questionnaire and district sample allocation in a report do not constitute verified geographic estimates. The `/geography` page documents the supported evidence level, current limitations, and requirements for a future map. No geographic statistics are fabricated or calculated.
+**No province- or district-level survey estimates are currently supported by the evidence available to Pathwise.** Blank geographic fields in a questionnaire and district sample allocation in a report do not constitute verified geographic estimates. The `/geography` page offers clickable reference boundaries, but shows no geographic statistics, comparisons, or predictions. The `/pathways` route accepts a selected area as context only; it does not make location-specific recommendations.
 
 See [the source verification audit](./docs/source-verification.md), [the geographic feasibility assessment](./docs/geographic-feasibility.md), and [release readiness](./docs/release-readiness.md) for evidence and limitations.
 

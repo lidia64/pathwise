@@ -63,9 +63,9 @@ No values, denominators, units, rounding rules, or geographic estimates have bee
 
 ## Geographic feasibility decision
 
-The current repository does not support a Pathwise district- or province-level map. The questionnaire contains blank location fields, while the report's district sample allocation describes design rather than a verified district estimate. No geographic aggregate dataset, boundary geometry, respondent microdata, released weight field, geographic identifier dictionary, or variance/precision materials are connected to the application. Publication charts remain source-reported aggregates and have not been independently recalculated for Pathwise.
+The current survey evidence does not support a Pathwise district- or province-level statistical map. The questionnaire contains blank location fields, while the report's district sample allocation describes design rather than a verified district estimate. No geographic aggregate dataset, respondent microdata, released weight field, geographic identifier dictionary, or variance/precision materials are connected to the application. A separately sourced 2020-vintage geoBoundaries Open ADM1 reference file provides Kigali City and four province outlines for navigation only; it is not linked to survey respondents or estimates. Publication charts remain source-reported aggregates and have not been independently recalculated for Pathwise.
 
-The only supported geographic statement is that the inspected materials describe national surveys and their designs; Pathwise has no connected level at which it can make a geographic comparison. See [the geographic feasibility assessment](./geographic-feasibility.md) for the inspected artifacts, source page references, requirements for reconsidering a map, and limitations.
+The only supported geographic statistical statement is that the inspected materials describe national surveys and their designs; Pathwise has no connected level at which it can make a geographic comparison. The displayed boundaries do not change this evidence limitation. See [the geographic feasibility assessment](./geographic-feasibility.md) for boundary provenance, source page references, requirements for reconsidering statistical mapping, and limitations.
 
 ## Privacy and repository checks
 

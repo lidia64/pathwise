@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { AppIcon } from "@/components/app-icons";
 import { JourneyNextStep } from "@/components/journey-next-step";
 import { PageHeader } from "@/components/page-header";
+import { RwandaGeographicExplorer } from "@/components/rwanda-geographic-explorer";
 import {
-  DataStatus,
   EmptyState,
   SectionPanel,
 } from "@/components/workspace-components";
@@ -32,19 +32,11 @@ export default async function GeographyPage() {
       />
 
       <SectionPanel
-        title={geography.decisionTitle}
-        description={geography.decisionDetail}
-        className="geographic-feasibility-panel"
+        title={geography.mapTitle}
+        description={geography.mapDescription}
+        className="geographic-map-panel"
       >
-        <div className="geographic-feasibility">
-          <span className="map-placeholder-icon" aria-hidden="true">
-            <AppIcon name="geography" />
-          </span>
-          <div>
-            <h3>{geography.decision}</h3>
-            <DataStatus>{geography.noMapStatus}</DataStatus>
-          </div>
-        </div>
+        <RwandaGeographicExplorer labels={geography.mapLabels} />
       </SectionPanel>
 
       <div className="geography-evidence-grid">
@@ -75,7 +67,6 @@ export default async function GeographyPage() {
         </SectionPanel>
         <SectionPanel title={geography.supportedTitle}>
           <div className="supported-geography">
-            <DataStatus>{geography.supportedLevel}</DataStatus>
             <p>{geography.supportedDetail}</p>
           </div>
         </SectionPanel>

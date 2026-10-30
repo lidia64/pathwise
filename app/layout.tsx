@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: translate(
       language,
       "landing.heroDescription",
-      "Explore financial inclusion, vulnerability and social protection evidence to support decision-making in Rwanda."
+      "Pathwise transforms verified evidence about financial inclusion, financial health, poverty and vulnerability into clearer pathways for informed action."
     ),
   };
 }

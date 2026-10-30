@@ -101,9 +101,9 @@ The current code already aligns with the safest release posture. The five highes
    - Impact: high. Protects data credibility and scenario framing.
    - Why this matters: the current app does not have a verified dataset connection.
 
-4. Keep geographic view blocked until verified boundary and estimate metadata are available.
+4. Keep geographic statistics blocked until verified estimate metadata are available; reference boundaries alone do not enable a statistical map.
    - Impact: high. Prevents unsupported district-level inference or map display.
-   - Why this matters: the audit explicitly notes that district boundaries and estimates are not in the current files.
+   - Why this matters: the reference map is sourced separately and is not linked to survey respondents or estimates.
 
 5. Ensure that any future data ingestion or indicator registry documentation uses a verified metadata schema before values are surfaced.
    - Impact: high. Protects future releases from mismatches in source, denominator, and formula.
@@ -126,9 +126,10 @@ The existing release status is not “ready for publication of actual statistics
   - source list remains informational only
 
 - `/geography`
-  - geographic evidence feasibility state remains clear and source-grounded
-  - no map, boundary, province/district estimate, or ranking is implied
-  - source page references and the future-data requirements remain visible
+  - reference boundaries remain clearly distinguished from statistical data
+  - selection, search, geographic/evidence-domain filters, zoom and reset remain functional
+  - no province/district estimate, comparison, or ranking is implied
+  - boundary provenance, source/year metadata, and future-data requirements remain visible
 
 - `/vulnerability`
   - domain cards remain “pending verification” only
@@ -168,7 +169,7 @@ This readiness assessment matches the current application code:
 
 - The dashboard in `app/(workspace)/dashboard/page.tsx` renders only empty states and pending statuses.
 - `lib/module-content.ts` defines four domain concepts, not numbers, and explicitly marks source roles as pending verification.
-- `app/(workspace)/geography/page.tsx` disables geography and indicates no district boundary or estimate is connected.
+- `app/(workspace)/geography/page.tsx` renders the reference-boundary explorer and explicitly indicates no geographic estimate or comparison is connected.
 - `app/(workspace)/vulnerability/page.tsx` states that indicators are pending verification and no interpretation is shown.
 - `app/(workspace)/pathways/page.tsx` explicitly states that no rule is activated and required variables are pending verification.
 - `app/(workspace)/impact/page.tsx` clearly says no impact-monitoring series are available.
@@ -213,3 +214,10 @@ No browser automation client was available for this run. Visual layout at mobile
 - Added translated navigation and landing-page text, route headings, and Geographic Evidence content, with RTL direction styling for Arabic.
 - **Localization is incomplete and is a release blocker for claiming seven-language support.** Longer sections and multiple labels on dashboard, vulnerability, pathways, impact, methodology and landing pages still fall back to English. See [localization.md](./localization.md) for the explicit string-scope list and translation-review requirements.
 - No browser claim is made here until interaction, persistence, RTL, and visual checks have been executed for this implementation.
+
+## Geographic explorer update
+
+- Added the geoBoundaries Open ADM1 2020 reference asset sourced from the Rwanda Geo Portal (CC BY 4.0): Kigali City and four province outlines only.
+- The interactive map uses outlines for navigation and selected-area highlighting, never as an indicator-value choropleth. No survey respondents are joined to map geometry.
+- Area context can be carried into the Resilience Navigator, where it is validated against supported locations and explicitly does not produce area-specific measures or recommendations.
+- The explorer and shared footer still require browser interaction, responsive, keyboard and translated-route checks before release.

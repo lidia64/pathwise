@@ -25,8 +25,28 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function PathwaysPage() {
+const supportedGeographicContext = new Set([
+  "Kigali City",
+  "Southern Province",
+  "Northern Province",
+  "Eastern Province",
+  "Western Province",
+]);
+
+export default async function PathwaysPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string | string[] }>;
+}) {
   const { language, translate } = await getMessages();
+  const params = await searchParams;
+  const locationValue = Array.isArray(params.location)
+    ? params.location[0]
+    : params.location;
+  const selectedLocation =
+    locationValue && supportedGeographicContext.has(locationValue)
+      ? locationValue
+      : null;
   const t = (key: string, english: string) =>
     translate(language, `pathways.${key}`, english);
   return (
@@ -36,6 +56,21 @@ export default async function PathwaysPage() {
         title={t("title", "Pathway Explorer")}
         description="Explore potential pathway categories as questions for investigation. No pathway is recommended for a real population until its rule and required variables are verified."
       />
+
+      {selectedLocation && (
+        <aside className="pathway-location-context" aria-live="polite">
+          <strong>
+            {t("locationContext", "Selected geographic context")}:{" "}
+            {selectedLocation}
+          </strong>
+          <p>
+            {t(
+              "locationContextLimit",
+              "This location is context only. No location-specific indicator, comparison or recommendation is available.",
+            )}
+          </p>
+        </aside>
+      )}
 
       <SectionPanel
         title={t("categories", "Pathway categories")}

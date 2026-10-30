@@ -2,7 +2,7 @@
 
 ## Decision
 
-**A district- or province-level map is not feasible from the evidence currently present in this repository.** The product therefore provides a Geographic Evidence page, not a decorative or simulated map.
+**A statistical district- or province-level map is not feasible from the survey evidence currently present in this repository.** The Geographic Evidence page now includes a real, clickable reference map of Rwanda's province-level administrative boundaries. It does not display survey values or imply geographic comparisons.
 
 The only supported geographic description for Pathwise at this stage is that the inspected publications concern national surveys and discuss survey design. There is no geographic comparison level with observed Pathwise indicator values. No province- or district-level estimate is connected to the application.
 
@@ -15,7 +15,13 @@ The source inventory in [`source-verification.md`](./source-verification.md) rec
 - FinScope 2024 presentation (39 pages): published charts are source-reported aggregates, not connected geographic aggregates available to Pathwise. District-looking chart content does not, by itself, establish that Pathwise can reproduce or republish district estimates.
 - EICV7 VUP thematic summary (4 pages): a programme-specific summary. The full report and referenced tables workbook are not in the local project listing.
 
-No aggregate geographic data file, administrative boundary data, microdata, codebook, released weight variable, geographic identifier dictionary, or variance-estimation materials were found in the repository file listing. The blank questionnaire and publication descriptions are not a substitute for these artifacts.
+No aggregate geographic data file, survey microdata, codebook, released weight variable, geographic identifier dictionary, or variance-estimation materials were found in the repository file listing. The blank questionnaire and publication descriptions are not a substitute for these artifacts.
+
+## Reference map scope and provenance
+
+The local asset [`../public/geography/rwanda-admin1.geojson`](../public/geography/rwanda-admin1.geojson) contains five 2020-vintage ADM1 reference boundaries: Kigali City and Rwanda's four provinces. The boundary release is from geoBoundaries Open Data, sourced from the Rwanda Geo Portal, and is licensed under CC BY 4.0. The geography page links to the source portal and geoBoundaries release.
+
+The map supports search, area selection, keyboard selection, visual highlighting, and zoom/reset. Its fill colors identify reference versus selected areas only; they do not encode indicator values. No district boundaries are shown. Each selected-area panel identifies the reference boundary year separately from the candidate survey source and year, and states that verified area-level indicators, definitions, and comparisons are unavailable. FinScope, EICV7 and VUP populations remain distinct and are not linked to the boundaries.
 
 ## Supported and unsupported use
 
@@ -47,6 +53,6 @@ Do not link FinScope, EICV7 and VUP respondent records without an approved and d
 
 ## Implementation
 
-`/geography` is now an evidence page with an explicit feasibility state, source descriptions, the supported-level decision, defensible current uses, map prerequisites, and limitations. It does not render fictitious boundaries, geographic selectors, estimates, or a zero-valued map.
+`/geography` is an interactive reference-boundary explorer with explicit source attribution, area selection, candidate evidence-domain filters, no-data states, map prerequisites, and limitations. The Resilience Navigator accepts a validated location as context only; it does not produce area-specific indicators or recommendations.
 
 The page provides citations to the questionnaire PDF p. 1, FinScope final report PDF pp. 20–21, and EICV7 VUP summary PDF p. 1, consistent with the source audit. No map interaction exists to test.
