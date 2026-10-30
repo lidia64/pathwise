@@ -1,7 +1,7 @@
 export const languageOptions = [
   {
     id: "kin",
-    nativeName: "Kinyarwanda",
+    nativeName: "Ikinyarwanda",
     htmlLang: "kin-RW",
     formatLocale: "kin-RW",
     countryCode: "RW",
@@ -33,7 +33,7 @@ export const languageOptions = [
   },
   {
     id: "zh",
-    nativeName: "中文",
+    nativeName: "简体中文",
     htmlLang: "zh-CN",
     formatLocale: "zh-CN",
     countryCode: "CN",

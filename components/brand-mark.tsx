@@ -14,10 +14,10 @@ export function BrandMark() {
         strokeLinejoin="round"
       />
       <circle cx="7" cy="29.5" r="3" fill="currentColor" />
-      <circle cx="33" cy="10.5" r="3" fill="#00A896" />
-      <rect x="7" y="7" width="4" height="8" rx="1.2" fill="#1565C0" opacity=".45" />
-      <rect x="14" y="7" width="4" height="12" rx="1.2" fill="#1565C0" opacity=".7" />
-      <rect x="21" y="7" width="4" height="5" rx="1.2" fill="#1565C0" />
+      <circle cx="33" cy="10.5" r="3" fill="var(--amber)" />
+      <rect x="7" y="7" width="4" height="8" rx="1.2" fill="currentColor" opacity=".45" />
+      <rect x="14" y="7" width="4" height="12" rx="1.2" fill="currentColor" opacity=".7" />
+      <rect x="21" y="7" width="4" height="5" rx="1.2" fill="currentColor" />
     </svg>
   );
 }

@@ -1,13 +1,25 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter, Manrope, Noto_Sans_Arabic } from "next/font/google";
 import { getLanguageOption } from "@/lib/i18n/languages";
 import { getRequestLanguage } from "@/lib/i18n/server";
 import { translate } from "@/lib/i18n/translations";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const arabic = Noto_Sans_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
 });
 
@@ -30,7 +42,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang={language.htmlLang}
       dir={language.direction}
-      className={`${poppins.variable} h-full antialiased`}
+      className={`${manrope.variable} ${inter.variable} ${arabic.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
     >
       <body className="min-h-full flex flex-col">{children}</body>

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useRef, type FormEvent } from "react";
+import { useRef, type ChangeEvent, type FormEvent } from "react";
 import {
   DEFAULT_LANGUAGE,
   languageOptions,
@@ -21,6 +21,10 @@ export function LanguageSwitcher({ language }: { language: LanguageId }) {
     event.currentTarget.submit();
   }
 
+  function submitLanguageChange(event: ChangeEvent<HTMLSelectElement>) {
+    event.currentTarget.form?.requestSubmit();
+  }
+
   return (
     <form
       className="language-form"
@@ -34,7 +38,7 @@ export function LanguageSwitcher({ language }: { language: LanguageId }) {
         name="returnTo"
         value={pathname}
       />
-      <label htmlFor="pathwise-language">
+      <label className="visually-hidden" htmlFor="pathwise-language">
         {translate(language, "nav.language", "Language")}
       </label>
       <select
@@ -42,6 +46,7 @@ export function LanguageSwitcher({ language }: { language: LanguageId }) {
         name="language"
         defaultValue={language || DEFAULT_LANGUAGE}
         aria-label={translate(language, "nav.chooseLanguage", "Choose language")}
+        onChange={submitLanguageChange}
       >
         {languageOptions.map((option) => (
           <option key={option.id} value={option.id}>
@@ -49,9 +54,6 @@ export function LanguageSwitcher({ language }: { language: LanguageId }) {
           </option>
         ))}
       </select>
-      <button type="submit" className="language-submit">
-        {translate(language, "common.apply", "Apply")}
-      </button>
     </form>
   );
 }

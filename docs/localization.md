@@ -2,9 +2,11 @@
 
 ## Architecture
 
-Pathwise retains its existing route paths. The selected language is stored in the `pathwise-language` cookie (one-year lifetime, `SameSite=Lax`, `HttpOnly`) and read on the server for document metadata and translated server-rendered content. A same-origin `POST /api/language` validates the submitted language against the allowlist and redirects to a validated same-site path. The selector displays native language names and preserves the current route; when JavaScript is active it also retains the query string.
+Pathwise retains its existing route paths. The selected language is stored in the `pathwise-language` cookie (one-year lifetime, `SameSite=Lax`, `HttpOnly`) and read on the server for document metadata and translated server-rendered content. A same-origin `POST /api/language` validates the submitted language against the allowlist and redirects to a validated same-site path. The selector displays native language names and preserves the current route and query string.
 
 English (`en`) is the default when no valid preference exists. This cookie-based approach avoids introducing locale route prefixes or changing existing bookmarks.
+
+The navigation language control uses the existing `POST /api/language` flow and submits as soon as a native language option is selected. Its accessible label is available to assistive technology; the dropdown shows each language's native name. The current path and query string are retained on selection.
 
 | Language | Identifier | HTML language | Formatting locale | Country metadata | Direction |
 |---|---|---|---|---|---|
@@ -44,6 +46,6 @@ Translations were drafted for this implementation and have not been independentl
 
 ## Arabic and script support
 
-Selecting Arabic sets `lang="ar"` and `dir="rtl"` on the root document. Directional layouts use RTL-aware flow; CSS logical positioning is used for the geography evidence lists and numbered cards, and the next-step arrow is mirrored. Cited source identifiers are isolated in LTR spans on the Geographic Evidence page. Arabic and Chinese font stacks include script-compatible system fallbacks in addition to Poppins for Latin text. The logo and any future charts/maps must not be blindly mirrored.
+Selecting Arabic sets `lang="ar"` and `dir="rtl"` on the root document. Directional layouts use RTL-aware flow; CSS logical positioning is used for the geography evidence lists and numbered cards, and the next-step arrow is mirrored. Cited source identifiers are isolated in LTR spans on the Geographic Evidence page. Manrope and Inter are self-hosted through `next/font`; Noto Sans Arabic is loaded for Arabic, with system Arabic fallbacks, and Chinese retains CJK system fallbacks. The logo and any future charts/maps must not be blindly mirrored.
 
-Browser verification is still required for Arabic reading order, mixed-script citations, all seven complete route translations, keyboard selection and persistence, and wrapping at narrow widths. A locale cookie persists the choice but is not a substitute for a complete translated interface.
+Browser smoke checks confirmed that language changes update translated navigation and page headings, retain the current route and query string, and persist after refresh. Arabic sets RTL and uses Noto Sans Arabic; all seven routes rendered without horizontal overflow at a 390px viewport. Keyboard-only operation, mixed-script citations, and fluent-speaker review remain to be checked. These checks do not imply that the untranslated interface strings listed above are complete.
