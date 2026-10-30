@@ -3,6 +3,9 @@
 ### From Vulnerability to Resilience
 
 **Pathwise** is a data-driven platform designed to help users explore financial vulnerability, poverty, and resilience in Rwanda. It brings together evidence from existing national datasets to make complex information easier to understand and support informed decision-making.
+Deployment  Link: https://pathwise-self-xi.vercel.app/pathways
+vidio URL:https://drive.google.com/file/d/1nXgoodhHB4wXKWzPi3wPRHCL6MrGgpLk/view
+
 
 ## 1. The Problem
 
